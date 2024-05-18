@@ -1,12 +1,11 @@
 let word;
 
 export function setupWord(element, initWord) {
-    setupWord(document.querySelector('#word-container'), initWord)
-    word.split('').forEach(() => {
+    word = initWord
+    initWord.split('').forEach(() => {
         element.insertAdjacentHTML('beforeend', `<div class="letter-box"></div>`)
     });
 }
-
 export function isLetterInWord(letter) {
     return word.includes(letter)
 }

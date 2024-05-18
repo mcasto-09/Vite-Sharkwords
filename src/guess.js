@@ -9,7 +9,7 @@ export function setupGuesses(element, handleGuess) {
   });
 }
 
- const handleGuess = (guessEvent, letter) => {
+ export const handleGuess = (guessEvent, letter) => {
   console.log(`guessEvent is: ${guessEvent}`)
   console.log(`letter is: ${letter}`)
 };

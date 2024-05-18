@@ -6,7 +6,7 @@ import {isLetterInWord} from './src/word.js';
 import {revealLetterInWord} from './src/word.js';
 import {setupGuesses} from './src/guess.js';
 // const { key } = myObject
-
+let numWrong
 document.querySelector('#app').innerHTML = `
   <section id="shark-img"></section>
 
@@ -18,12 +18,13 @@ document.querySelector('#app').innerHTML = `
 `;
 
 const initSharkwords = () => {
-  let numWrong = 0;
+  numWrong = 0;
   const word = getRandomWord();
-
+  setupWord(document.querySelector('#word-container'), word);
   setSharkImage(document.querySelector(`#shark-img`), numWrong)
   // for debugging:
   console.log(`[INFO] Correct word is: ${word}`);
+  
 };
 
 const handleGuess = (guessEvent, letter) =>{
@@ -33,17 +34,21 @@ const handleGuess = (guessEvent, letter) =>{
   if (isLetterInWord(letter)) {
     revealLetterInWord(letter);
   } else {
-    numwrong ++
-    setSharkImage(sharkImgE1,numWrong);
+    numWrong += 1;
+    setSharkImage(document.querySelector(`#shark-img`), numWrong)
+    };
   }
-}
+
 setupGuesses(document.querySelector('#letter-buttons'), handleGuess);
 let isWordComplete = true;
 for (const el of document.querySelectorAll('.letter-box')) {
   if (el.innerText === '') {
     isWordComplete = false;
     break; 
-  }
+  } 
+  document.querySelectorAll('button').forEach((btn) => {
+    btn.setAttribute('disabled', true);
+  });
 }
 
 initSharkwords();
